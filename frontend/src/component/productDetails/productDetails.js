@@ -422,7 +422,7 @@ const ProductDetails = () => {
           : "There is No Comments yet"}
         <div class="comments-container">
           {allComments}
-          <ul id="comments-list" class="comments-list">
+         {token? <ul id="comments-list" class="comments-list">
             <li>
               <div class="comment-main-level">
                 <div class="comment-avatar">
@@ -448,7 +448,7 @@ const ProductDetails = () => {
                 </div>
               </div>
             </li>
-          </ul>
+          </ul>:null}
         </div>
       </div>
     </>
