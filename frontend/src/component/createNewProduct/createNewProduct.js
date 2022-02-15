@@ -57,8 +57,8 @@ const NewProduct = ({ lat, setLat, long, setLong }) => {
   };
   /////////////////////////////////////GeoLocation////////////////////////////////////
 
-  const geoLocate = async () => {
-    await navigator.geolocation.getCurrentPosition((position) => {
+  const geoLocate =  () => {
+    navigator.geolocation.getCurrentPosition((position) => {
       console.log(position.coords.latitude);
       //   location = position;
       setLat(position.coords.latitude);

@@ -24,6 +24,7 @@ const createNewProduct = (req, res) => {
 
   connection.query(query, data, (err, result) => {
     if (err) {
+      console.log(err);
       return res.status(500).json({
         success: false,
         message: `Something went wrong While creating product`,
