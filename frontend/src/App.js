@@ -19,6 +19,7 @@ import Home from "./component/Home/Home";
 import ContactUs from "./component/emailjs/emailjs";
 import GeoLocate from "./component/Geolocate/geoLocate";
 import Demo1 from "./component/Maps/maps";
+import Chat from "./component/Chat/Chat"
 
 import GetProductsByCategory from "./component/getProductByCategory/AllProductByCategory";
 
@@ -79,6 +80,7 @@ function App() {
 
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="chat" element={<Chat />}/>
       </Routes>
 
       <Footer />

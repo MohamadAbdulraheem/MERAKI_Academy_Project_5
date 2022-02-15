@@ -11,8 +11,10 @@ class Demo1 extends Component {
     super();
     this.state = {
       name: "React",
+      long:""
     };
   }
+  
 
   render() {
     return (

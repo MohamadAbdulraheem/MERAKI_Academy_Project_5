@@ -1,7 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+
+const socket = require("socket.io");
 require("dotenv").config();
 const app = express();
+
 require("./database/db");
 
 const { productRouter } = require("./routes/productRouter");
@@ -38,6 +41,23 @@ app.use("/wishlist", wishlistRouter);
 //create like route with path of "/like"
 app.use("/like", likeRouter);
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`SERVER WORKING ON PORT: ${PORT}`);
+});
+const io = socket(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    method: ["GET", "POST"],
+  },
+});
+// create event listener on connection
+io.on("connection", (socket) => {
+  console.log("new user join");
+  // console.log(socket.conn.id);
+  socket.on("message", (data) => {
+    socket.broadcast.emit("message", data);
+  });
+  socket.on("disconnect", () => {
+    console.log("\nuser left ...");
+  });
 });

@@ -1,27 +1,32 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
+import { io } from "socket.io-client";
+import "./Chat.css"
+const ENDPOINT = "http://localhost:5000";
+const socket = io.connect(ENDPOINT);
+function Chat() {
+  const [message, setMessage] = useState();
 
-export class Chat extends Component {
-  componentDidMount() {
-    (function(d, m) {
-      var kommunicateSettings = {
-        appId: "11d6e9800d162d3f8b0f3b79b3f8f13df",
-        popupWidget: true,
-        automaticChatOpenOnNavigation: true,
-        botId: "alex-kvvpl",
-      };
+  const sendMessage = () => {
+    socket.emit("message", { message });
+  };
+  useEffect(() => {
+    socket.on("message", (data) => {
+      console.log(data);
+    });
+  }, []);
 
-      var s = document.createElement("script");
-      s.type = "text/javascript";
-      s.async = true;
-      s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
-      var h = document.getElementsByTagName("head")[0];
-      h.appendChild(s);
-      window.kommunicate = m;
-      m._globals = kommunicateSettings;
-    })(document, window.kommunicate || {});
-  }
-
-  render() {
-    return <div></div>;
-  }
+  return (
+    <div>
+      <input
+        type="text"
+        onChange={(e) => {
+          setMessage(e.target.value);
+        }}
+      />
+      <button onClick={sendMessage}> Send </button>
+    </div>
+    
+  );
 }
+
+export default Chat;
